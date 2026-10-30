@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="color-scheme" content="dark" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <noscript>
+            <meta http-equiv="refresh" content="0; url='%URL%'" />
+        </noscript>
+        <title>Redirecting...</title>
+        <style>
+            body {
+                min-height: 100dvh;
+                min-width: 100dvw;
+                margin: 0;
+                padding: 0;
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #111;
+                font-size: 1.2em;
+            }
+            #space {
+                background-color: #111;
+            }
+            #space,
+            .stars {
+                overflow: hidden;
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: -1;
+            }
+
+            .stars {
+                background-image:
+                    radial-gradient(
+                        2px 2px at 20px 30px,
+                        #eee,
+                        rgba(0, 0, 0, 0)
+                    ),
+                    radial-gradient(
+                        2px 2px at 40px 70px,
+                        #fff,
+                        rgba(0, 0, 0, 0)
+                    ),
+                    radial-gradient(
+                        2px 2px at 50px 160px,
+                        #ddd,
+                        rgba(0, 0, 0, 0)
+                    ),
+                    radial-gradient(
+                        2px 2px at 90px 40px,
+                        #fff,
+                        rgba(0, 0, 0, 0)
+                    ),
+                    radial-gradient(
+                        2px 2px at 130px 80px,
+                        #fff,
+                        rgba(0, 0, 0, 0)
+                    ),
+                    radial-gradient(
+                        2px 2px at 160px 120px,
+                        #ddd,
+                        rgba(0, 0, 0, 0)
+                    );
+                background-repeat: repeat;
+                background-size: 200px 200px;
+                animation: zoom 40s infinite;
+                opacity: 0;
+            }
+
+            .stars:nth-child(1) {
+                background-position: 50% 50%;
+                animation-delay: -8s;
+            }
+            .stars:nth-child(2) {
+                background-position: 20% 60%;
+                animation-delay: 0s;
+            }
+            .stars:nth-child(3) {
+                background-position: -20% -30%;
+                animation-delay: 8s;
+            }
+            .stars:nth-child(4) {
+                background-position: 40% -80%;
+                animation-delay: 16s;
+            }
+            .stars:nth-child(5) {
+                background-position: -20% 30%;
+                animation-delay: 24s;
+            }
+
+            @keyframes zoom {
+                0% {
+                    opacity: 0.2;
+                    transform: scale(0.5);
+                    animation-timing-function: ease-in;
+                }
+                85% {
+                    opacity: 1;
+                    transform: scale(2.8);
+                    animation-timing-function: linear;
+                }
+                100% {
+                    opacity: 0.2;
+                    transform: scale(3.5);
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div style="display: contents">
+            <div
+                style="
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    text-align: center;
+                    color: #fff;
+                "
+            >
+                <h1 style="font-size: 2em">Redirecting...</h1>
+                <button onclick="cancelCountdown()" style="font-size: 1em; margin-bottom: 1em">
+                    Cancel Redirect
+                </button>
+                <p style="font-size: 1em" id="countdown-text">
+                    If you are not redirected automatically in
+                    <span id="remaining">5</span> seconds, follow the link below:
+                </p>
+                <p id="redirect-link" style="font-size: 1em">
+                    <a
+                        href="%URL%"
+                        style="color: #FF00DD; text-decoration: underline"
+                        >%URL%</a
+                    >
+                </p>
+
+
+            </div>
+        </div>
+        <div id="space">
+            <div class="stars"></div>
+            <div class="stars"></div>
+            <div class="stars"></div>
+            <div class="stars"></div>
+            <div class="stars"></div>
+        </div>
+        <script>
+            let remaining = 5;
+            const remainingElement = document.getElementById("remaining");
+            const countdownElement = document.getElementById("countdown-text");
+            const url = "%URL%";
+
+            const countdown = setInterval(() => {
+                remaining--;
+                remainingElement.textContent = remaining;
+                if (remaining <= 0) {
+                    clearInterval(countdown);
+                    window.location.href = url;
+                }
+            }, 1000);
+            const cancelCountdown = () => {
+                clearInterval(countdown);
+                countdownElement.textContent =
+                    "Redirect canceled. You can click the link below to proceed.";
+            };
+        </script>
+    </body>
+</html>
