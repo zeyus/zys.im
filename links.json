@@ -1,6 +1,8 @@
 {
     "separators": ["-", "/"],
     "links": {
-        "x": "https://zeyus.com/_vault/rise-together"
+        "x": "https://zeyus.com/_vault/rise-together",
+        "": "https://zeyus.com/",
+        "me": "https://me.zys.im/"
     }
 }
